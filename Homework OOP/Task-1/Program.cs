@@ -1,4 +1,4 @@
-﻿namespace Task_1_РаботаСКлассами;
+﻿namespace Task_1;
 
 internal class Program
 {
@@ -8,9 +8,9 @@ internal class Program
         var player2 = new Player("Khel", 40, "Warrior");
         var player3 = new Player();
 
-        player1.Info();
-        player2.Info();
-        player3.Info();
+        player1.ShowInfo();
+        player2.ShowInfo();
+        player3.ShowInfo();
     }
 
     private class Player
@@ -33,7 +33,7 @@ internal class Program
             ClassName = "Unknown";
         }
 
-        public void Info()
+        public void ShowInfo()
         {
             Console.WriteLine($"\nPlayer - {Name}\nLevel - {Lvl}\nClass - {ClassName}\n");
         }
