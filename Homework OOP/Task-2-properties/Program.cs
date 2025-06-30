@@ -1,20 +1,20 @@
 ﻿namespace Task_2;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         //Создаем карту
-        Map map = new Map(10, 10);
-        Player player = new Player();
-        Render render = new Render(map, player);
+        var map = new Map(10, 10);
+        var player = new Player();
+        var render = new Render(map, player);
         while (true)
         {
             Console.WriteLine($"Здравствуйте!\nКарта размером {map.XLimit}x{map.YLimit}" +
                               $"\nВведите желаемые координаты игрока:");
-            
+
             Console.WriteLine("Для Х - ");
-            int NewX = int.Parse(Console.ReadLine());
+            var NewX = int.Parse(Console.ReadLine());
             if (NewX <= 0 || NewX > map.XLimit)
             {
                 Console.WriteLine("Вы вышли за пределы!");
@@ -24,9 +24,9 @@ class Program
             {
                 player.X = NewX - 1;
             }
-           
+
             Console.WriteLine("Для Y - ");
-            int NewY = int.Parse(Console.ReadLine());
+            var NewY = int.Parse(Console.ReadLine());
             if (NewY <= 0 || NewY > map.YLimit)
             {
                 Console.WriteLine("Вы вышли за пределы!");
@@ -35,9 +35,9 @@ class Program
             else
             {
                 player.Y = NewY - 1;
-                
             }
 
+            //Выводим на экран карту
             if (player.X < 0 || player.Y < 0)
             {
                 Console.WriteLine("Вы вне карты!");
@@ -45,139 +45,115 @@ class Program
             else
             {
                 Console.WriteLine("Спасибо! Вот ваше местоположение:");
-                            render.ShowMap();
+                render.ShowMap();
             }
-            
+
+            //Чистим окно вывода
             Console.ReadLine();
             Console.Clear();
-       
         }
     }
 
-    class Map
+    private class Map
     {
-        public char[,] Coordinate;
+        public const int _mapLimit = 10;
         private int _xLimit;
         private int _yLimit;
-        public const int _mapLimit = 10;
-        public char MapIcon = '.';
-        
+        public readonly char MapIcon = '.';
+
+        public Map(int XLimit, int YLimit)
+        {
+            _xLimit = XLimit;
+            _yLimit = YLimit;
+        }
+
 
         public int XLimit
         {
-            get { return _xLimit; }
+            get => _xLimit;
             set
             {
                 if (value <= _mapLimit)
-                {
                     _xLimit = value;
-                }
-                else 
+                else
                     Console.WriteLine($"Map size cannot be more than {_mapLimit}");
             }
         }
 
         public int YLimit
         {
-            get { return _yLimit; }
+            get => _yLimit;
             set
             {
                 if (value <= _mapLimit)
-                {
                     _yLimit = value;
-                }
-                else 
+                else
                     Console.WriteLine($"Map size cannot be more than {_mapLimit}");
             }
         }
-
-        public Map(int XLimit, int YLimit)
-        {
-            _xLimit = XLimit;
-            _yLimit = YLimit;
-            Coordinate = new char[XLimit, YLimit];
-        }
-
-        public void InitializeMap()
-        {
-            for (int i = 0; i < YLimit; i++)
-            {
-                for (int j = 0; j < XLimit; j++)
-                {
-                    Coordinate[i, j] = MapIcon;
-                }
-            }
-        }
-
+        
     }
 
-    class Player
+    private class Player
     {
-        
         private int _x;
         private int _y;
-        public char PlayerIcon = '@';
-       
+        public readonly char PlayerIcon = '@';
+
         public int X
         {
-            get { return _x; }
+            get => _x;
             set
             {
                 if (value <= Map._mapLimit)
-                {
                     _x = value;
-                }
                 else Console.WriteLine($"Map size cannot be more than {Map._mapLimit}");
             }
-            
         }
+
         public int Y
         {
-            get { return _y; }
+            get => _y;
             set
             {
                 if (value <= Map._mapLimit)
-                {
                     _y = value;
-                }
                 else Console.WriteLine($"Map size cannot be more than {Map._mapLimit}");
             }
-            
         }
 
         public void MovePlayer(int x, int y)
         {
+            //возвращаем к свойствам для использования логики
             X = x;
             Y = y;
-
+            
             _x = X;
             _y = Y;
         }
     }
 
-    class Render
+    private class Render
     {
-        private Map _map;
-        private Player _player;
+        private readonly Map _map;
+        private readonly Player _player;
+
         public Render(Map map, Player player)
         {
             _map = map;
             _player = player;
         }
-        
-        
+
+
         public void ShowMap()
         {
-            for (int i = 0; i < _map.YLimit; i++)
+            for (var i = 0; i < _map.YLimit; i++)
             {
-                for (int j = 0; j < _map.XLimit; j++)
-                {
+                for (var j = 0; j < _map.XLimit; j++)
                     if (j == _player.X && i == _player.Y)
-                    {
                         Console.Write(_player.PlayerIcon);
-                    }
                     else Console.Write(_map.MapIcon);
-                }
+
                 Console.WriteLine();
             }
         }
