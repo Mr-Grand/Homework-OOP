@@ -4,10 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        var map = new Map(5,5);
-        map.InitializeMap();
-        map.ShowMap();
+        var map1 = new Map(5,5);
+        map1.InitializeMap();
         
+
+        Render rend = new Render(map1);
+        rend.ShowMap();
 
     }
 
@@ -66,7 +68,7 @@ class Program
             }
         }
 
-        public void ShowMap()
+        /*public void ShowMap()
         {
             for (int i = 0; i < YLimit; i++)
             {
@@ -76,7 +78,7 @@ class Program
                 }
                 Console.WriteLine();
             }
-        }
+        }*/
 
         public char GetPoint(int x, int y)
         {
@@ -88,6 +90,7 @@ class Program
 
     class Player
     {
+        
         private int _x;
         private int _y;
         public char PlayerIcon = '@';
@@ -128,6 +131,23 @@ class Program
 
     class Render
     {
-        
+        private Map _map;
+
+        public Render(Map map)
+        {
+            _map = map;
+        }
+
+        public void ShowMap()
+        {
+            for (int i = 0; i < _map.YLimit; i++)
+            {
+                for (int j = 0; j < _map.XLimit; j++)
+                {
+                    Console.Write(_map.Coordinate[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
