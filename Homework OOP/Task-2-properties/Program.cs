@@ -7,18 +7,16 @@ class Program
         var map = new Map(5,5);
         map.InitializeMap();
         map.ShowMap();
-        /*Console.Write(map[0, 0]);
-        Console.Write(map[1, 1]);
-        Console.Write(map[2, 2]);*/
+        
 
     }
 
     class Map
     {
-        public char[,] _coordinate;
+        public char[,] Coordinate;
         private int _xLimit;
         private int _yLimit;
-        private const int _mapLimit = 10;
+        public const int _mapLimit = 10;
         public char MapIcon = '.';
         
 
@@ -54,7 +52,7 @@ class Program
         {
             _xLimit = XLimit;
             _yLimit = YLimit;
-            _coordinate = new char[XLimit, YLimit];
+            Coordinate = new char[XLimit, YLimit];
         }
 
         public void InitializeMap()
@@ -63,7 +61,7 @@ class Program
             {
                 for (int j = 0; j < XLimit; j++)
                 {
-                    _coordinate[i, j] = MapIcon;
+                    Coordinate[i, j] = MapIcon;
                 }
             }
         }
@@ -74,10 +72,15 @@ class Program
             {
                 for (int j = 0; j < XLimit; j++)
                 {
-                    Console.Write(_coordinate[i, j]);
+                    Console.Write(Coordinate[i, j]);
                 }
                 Console.WriteLine();
             }
+        }
+
+        public char GetPoint(int x, int y)
+        {
+            return Coordinate[x, y];
         }
         
 
@@ -89,10 +92,36 @@ class Program
         private int _y;
         public char PlayerIcon = '@';
 
+       
         public int X
         {
             get { return _x; }
-            set { _x = value; }
+            set
+            {
+                if (value <= Map._mapLimit)
+                {
+                    _x = value;
+                }
+                else Console.WriteLine($"Map size cannot be more than {Map._mapLimit}");
+            }
+            
+        }
+        public int Y
+        {
+            get { return _y; }
+            set
+            {
+                if (value <= Map._mapLimit)
+                {
+                    _y = value;
+                }
+                else Console.WriteLine($"Map size cannot be more than {Map._mapLimit}");
+            }
+            
+        }
+
+        public void MovePlayer(int x, int y)
+        {
             
         }
     }
