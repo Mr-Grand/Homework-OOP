@@ -4,13 +4,54 @@ class Program
 {
     static void Main(string[] args)
     {
-        var map1 = new Map(5,5);
-        map1.InitializeMap();
-        
+        //Создаем карту
+        Map map = new Map(10, 10);
+        Player player = new Player();
+        Render render = new Render(map, player);
+        while (true)
+        {
+            Console.WriteLine($"Здравствуйте!\nКарта размером {map.XLimit}x{map.YLimit}" +
+                              $"\nВведите желаемые координаты игрока:");
+            
+            Console.WriteLine("Для Х - ");
+            int NewX = int.Parse(Console.ReadLine());
+            if (NewX <= 0 || NewX > map.XLimit)
+            {
+                Console.WriteLine("Вы вышли за пределы!");
+                player.X = -1;
+            }
+            else
+            {
+                player.X = NewX - 1;
+            }
+           
+            Console.WriteLine("Для Y - ");
+            int NewY = int.Parse(Console.ReadLine());
+            if (NewY <= 0 || NewY > map.YLimit)
+            {
+                Console.WriteLine("Вы вышли за пределы!");
+                player.Y = -1;
+            }
+            else
+            {
+                player.Y = NewY - 1;
+                
+            }
 
-        Render rend = new Render(map1);
-        rend.ShowMap();
-
+            if (player.X < 0 || player.Y < 0)
+            {
+                Console.WriteLine("Вы вне карты!");
+            }
+            else
+            {
+                Console.WriteLine("Спасибо! Вот ваше местоположение:");
+                            render.ShowMap();
+            }
+            
+            Console.ReadLine();
+            Console.Clear();
+       
+        }
     }
 
     class Map
@@ -68,24 +109,6 @@ class Program
             }
         }
 
-        /*public void ShowMap()
-        {
-            for (int i = 0; i < YLimit; i++)
-            {
-                for (int j = 0; j < XLimit; j++)
-                {
-                    Console.Write(Coordinate[i, j]);
-                }
-                Console.WriteLine();
-            }
-        }*/
-
-        public char GetPoint(int x, int y)
-        {
-            return Coordinate[x, y];
-        }
-        
-
     }
 
     class Player
@@ -94,7 +117,6 @@ class Program
         private int _x;
         private int _y;
         public char PlayerIcon = '@';
-
        
         public int X
         {
@@ -125,26 +147,36 @@ class Program
 
         public void MovePlayer(int x, int y)
         {
-            
+            X = x;
+            Y = y;
+
+            _x = X;
+            _y = Y;
         }
     }
 
     class Render
     {
         private Map _map;
-
-        public Render(Map map)
+        private Player _player;
+        public Render(Map map, Player player)
         {
             _map = map;
+            _player = player;
         }
-
+        
+        
         public void ShowMap()
         {
             for (int i = 0; i < _map.YLimit; i++)
             {
                 for (int j = 0; j < _map.XLimit; j++)
                 {
-                    Console.Write(_map.Coordinate[i, j]);
+                    if (j == _player.X && i == _player.Y)
+                    {
+                        Console.Write(_player.PlayerIcon);
+                    }
+                    else Console.Write(_map.MapIcon);
                 }
                 Console.WriteLine();
             }
