@@ -1,16 +1,16 @@
 ﻿namespace Task_3;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         PlayerDataBase players = new();
 
-        var player1 = new Player("Danik", 11);
+        Player player1 = new("Danik", 11);
         players.AddPlayer(player1);
-        var player2 = new Player("Oleg", 99);
+        Player player2 = new("Oleg", 99);
         players.AddPlayer(player2);
-        var player3 = new Player("Alex", 30);
+        Player player3 = new("Alex", 30);
         players.AddPlayer(player3);
 
 
@@ -34,13 +34,13 @@ class Program
         players.ShowPlayers();
     }
 
-    class PlayerDataBase
+    private class PlayerDataBase
     {
         private List<Player> players = new();
 
         public void ShowPlayers()
         {
-            foreach (var player in players)
+            foreach (Player player in players)
             {
                 Console.WriteLine("___________________________________");
                 Console.WriteLine($"Name - {player.UserName}\nID - {player.Id}" +
@@ -65,22 +65,18 @@ class Program
         {
             int index = 0; //Сохраняем номер обьекта по индексу и удаляем его потом.
             //т.к. Нельзя удалять обьект во время цикла его перебора
-            foreach (var player in players)
-            {
+            foreach (Player player in players)
                 if (player.Id == playerId)
                     index = players.IndexOf(player);
-            }
 
             players.RemoveAt(index);
         }
 
         public Guid GetPlayerId(string name)
         {
-            foreach (var player in players)
-            {
+            foreach (Player player in players)
                 if (player.UserName == name)
                     return player.Id;
-            }
 
             return Guid.Empty;
         }
@@ -94,24 +90,20 @@ class Program
 
         public void BanPlayerID(Guid playerId)
         {
-            foreach (var player in players)
-            {
+            foreach (Player player in players)
                 if (player.Id == playerId)
                     player.Ban();
-            }
         }
 
         public void UnbanPlayerID(Guid playerId)
         {
-            foreach (var player in players)
-            {
+            foreach (Player player in players)
                 if (player.Id == playerId)
                     player.Unban();
-            }
         }
     }
 
-    class Player
+    private class Player
     {
         public Guid Id { get; }
         public string UserName { get; private set; }
