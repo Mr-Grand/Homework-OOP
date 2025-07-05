@@ -13,13 +13,18 @@ class Program
         var player3 = new Player("Alex", 30);
         players.AddPlayer(player3);
         
-        /*player2.ShowPlayerInfo();
-        Console.WriteLine("_____________________________");
-        Console.WriteLine(players.GetPlayerId("Oleg"));*/
         
-        players.ShowPlayers();
+        
+        /*players.ShowPlayers();
         players.RemovePlayer(players.GetPlayerId("Oleg"));
-        players.ShowPlayers();
+        players.ShowPlayers();*/
+        
+        Console.WriteLine("++++++++++++++++++++++++++++++++");
+        
+        players.ShowIndexPlayer(1);
+        players.BanPlayerID(players.GetPlayerId(1));
+        players.ShowIndexPlayer(1);
+        
 
 
 
@@ -41,17 +46,33 @@ class Program
                 
             }
         }
+        
+        //Информация игрока по индексу
+        public void ShowIndexPlayer(int index)
+        {
+            Console.WriteLine("_____________________________________");
+            Console.WriteLine($"Name - {players[index].UserName}\nID - {players[index].Id}" +
+                              $"\nLevel - {players[index].Lvl}" +
+                              $"\nBan status - {players[index].IsBanned}");
+        }
         public void AddPlayer(Player player)
         {
             players.Add(player);
         }
-
-        public void RemovePlayer(Player player)
+        public void RemovePlayer(Guid playerId) 
         {
-            players.Remove(player);
+            int index = 0; //Сохраняем номер обьекта по индексу и удаляем его потом.
+            //т.к. Нельзя удалять обьект во время цикла его перебора
+            foreach (var player in players)
+            {
+                if (player.Id == playerId)
+                    index = players.IndexOf(player);
+            }
+            players.RemoveAt(index);
         }
-
-        public Guid GetPlayerId(string name)
+ 
+        //Получение Id игрока по имени
+        public Guid GetPlayerId(string name) 
         {
             foreach (var player in players)
             {
@@ -60,18 +81,32 @@ class Program
             }
             return Guid.Empty; //Метод обязан что-то возвращать
         }
-
-        public void RemovePlayer(Guid playerId)
+        //Получение Id игрока по индексу
+        public Guid GetPlayerId(int index)
         {
-            int index = 0;
+            if (index <= players.Count)
+                return players.ElementAt(index).Id;
+            else return Guid.Empty; //Метод обязан что-то возвращать
+            
+            return Guid.Empty; //Метод обязан что-то возвращать
+        }
+
+        public void BanPlayerID(Guid playerId)
+        {
             foreach (var player in players)
             {
                 if (player.Id == playerId)
-                    index = players.IndexOf(player);
+                    player.Ban();
             }
-            players.RemoveAt(index);
         }
-        
+        public void UnbanPlayerID(Guid playerId)
+        {
+            foreach (var player in players)
+            {
+                if (player.Id == playerId)
+                    player.Unban();
+            }
+        }
         
     }
 
@@ -80,7 +115,7 @@ class Program
         public Guid Id { get; }     //свойство только для чтения
         public string UserName { get; private set; }    //Свойство для изменени только внутри класса
         public int Lvl { get; private set; }
-        public bool IsBanned { get; private set; }
+        public bool IsBanned  { get; private set; }
 
         public Player(string username, int lvl)
         {
@@ -95,12 +130,13 @@ class Program
             Console.WriteLine($"\nName - {UserName}\nID - {Id}\nLevel - {Lvl}\nBan status - {IsBanned}");
         }
 
-        
-        
-        
-        
-        
-        
-        
+        public void Ban()
+        {
+            IsBanned = true;
+        }
+        public void Unban()
+        {
+            IsBanned = false;
+        }
     }
 }
