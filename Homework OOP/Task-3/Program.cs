@@ -4,40 +4,39 @@ class Program
 {
     static void Main(string[] args)
     {
-        PlayerDataBase players = new PlayerDataBase();
-        
+        PlayerDataBase players = new();
+
         var player1 = new Player("Danik", 11);
         players.AddPlayer(player1);
         var player2 = new Player("Oleg", 99);
         players.AddPlayer(player2);
         var player3 = new Player("Alex", 30);
         players.AddPlayer(player3);
-        
-        
+
+
         players.ShowPlayers();
         Console.WriteLine("Нажмите клавишу, чтобы очистить вывод" +
                           " и проверить следующие методы");
-        
+
         Console.ReadKey(true);
         Console.Clear();
         Console.SetCursorPosition(0, 0);
-        Console.Write("\f\u001bc\x1B[3J"); 
+        Console.Write("\f\u001bc\x1B[3J");
         Console.SetCursorPosition(0, 0);
-        
-        
+
+
         players.ShowPlayers();
-        
+
         players.BanPlayerID(players.GetPlayerId(1)); // Баним первого игрока
         players.RemovePlayer(players.GetPlayerId("Oleg")); // Удаляем игрока по имени
-        
+
         Console.WriteLine("\nИгроки после изменений:");
         players.ShowPlayers();
-        
     }
 
     class PlayerDataBase
     {
-        private List<Player> players = new List<Player>();
+        private List<Player> players = new();
 
         public void ShowPlayers()
         {
@@ -46,10 +45,9 @@ class Program
                 Console.WriteLine("___________________________________");
                 Console.WriteLine($"Name - {player.UserName}\nID - {player.Id}" +
                                   $"\nLevel - {player.Lvl}\nBan status - {player.IsBanned}");
-                
             }
         }
-        
+
         public void ShowIndexPlayer(int index)
         {
             Console.WriteLine("_____________________________________");
@@ -57,12 +55,13 @@ class Program
                               $"\nLevel - {players[index].Lvl}" +
                               $"\nBan status - {players[index].IsBanned}");
         }
+
         public void AddPlayer(Player player)
         {
             players.Add(player);
         }
-        
-        public void RemovePlayer(Guid playerId) 
+
+        public void RemovePlayer(Guid playerId)
         {
             int index = 0; //Сохраняем номер обьекта по индексу и удаляем его потом.
             //т.к. Нельзя удалять обьект во время цикла его перебора
@@ -71,26 +70,26 @@ class Program
                 if (player.Id == playerId)
                     index = players.IndexOf(player);
             }
+
             players.RemoveAt(index);
         }
-        
-        public Guid GetPlayerId(string name) 
+
+        public Guid GetPlayerId(string name)
         {
             foreach (var player in players)
             {
                 if (player.UserName == name)
                     return player.Id;
             }
-            return Guid.Empty; 
+
+            return Guid.Empty;
         }
-        
+
         public Guid GetPlayerId(int index)
         {
             if (index <= players.Count)
-                return players.ElementAt(index-1).Id;
+                return players.ElementAt(index - 1).Id;
             else return Guid.Empty; //Метод обязан что-то возвращать
-            
-            return Guid.Empty; //Метод обязан что-то возвращать
         }
 
         public void BanPlayerID(Guid playerId)
@@ -101,7 +100,7 @@ class Program
                     player.Ban();
             }
         }
-        
+
         public void UnbanPlayerID(Guid playerId)
         {
             foreach (var player in players)
@@ -110,15 +109,14 @@ class Program
                     player.Unban();
             }
         }
-        
     }
 
     class Player
     {
-        public Guid Id { get; }     
-        public string UserName { get; private set; }   
+        public Guid Id { get; }
+        public string UserName { get; private set; }
         public int Lvl { get; private set; }
-        public bool IsBanned  { get; private set; }
+        public bool IsBanned { get; private set; }
 
         public Player(string username, int lvl)
         {
@@ -137,7 +135,7 @@ class Program
         {
             IsBanned = true;
         }
-        
+
         public void Unban()
         {
             IsBanned = false;
