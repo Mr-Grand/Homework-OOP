@@ -14,16 +14,31 @@ class Program
         players.AddPlayer(player3);
         
         
+        players.ShowPlayers();
+        Console.WriteLine("Нажмите клавишу, чтобы очистить вывод" +
+                          " и проверить следующие методы");
         
-        /*players.ShowPlayers();
-        players.RemovePlayer(players.GetPlayerId("Oleg"));
-        players.ShowPlayers();*/
+        Console.ReadKey(true); // true - чтобы нажатая клавиша не отображалась
+        Console.Clear();
+        Console.SetCursorPosition(0, 0);
+
+        // Дополнительно очищаем буфер (если предыдущие методы не помогли)
+        Console.Write("\f\u001bc\x1B[3J"); // Специальные escape-последовательности
+        Console.SetCursorPosition(0, 0);
         
-        Console.WriteLine("++++++++++++++++++++++++++++++++");
         
-        players.ShowIndexPlayer(1);
-        players.BanPlayerID(players.GetPlayerId(1));
-        players.ShowIndexPlayer(1);
+        
+        players.ShowPlayers();
+        
+        
+        players.BanPlayerID(players.GetPlayerId(1)); //Баним первого игрока
+        players.RemovePlayer(players.GetPlayerId("Oleg")); //Удаляем игрока по имени
+        
+        Console.WriteLine("\nИгроки после изменений:");
+        players.ShowPlayers();
+        
+        
+        
         
 
 
@@ -85,7 +100,7 @@ class Program
         public Guid GetPlayerId(int index)
         {
             if (index <= players.Count)
-                return players.ElementAt(index).Id;
+                return players.ElementAt(index-1).Id;
             else return Guid.Empty; //Метод обязан что-то возвращать
             
             return Guid.Empty; //Метод обязан что-то возвращать
