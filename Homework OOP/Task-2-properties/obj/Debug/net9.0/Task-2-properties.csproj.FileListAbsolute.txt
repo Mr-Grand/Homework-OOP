@@ -1,0 +1,15 @@
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\bin\Debug\net9.0\Task-2-properties.exe
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\bin\Debug\net9.0\Task-2-properties.deps.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\bin\Debug\net9.0\Task-2-properties.runtimeconfig.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\bin\Debug\net9.0\Task-2-properties.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\bin\Debug\net9.0\Task-2-properties.pdb
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.AssemblyInfo.cs
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.sourcelink.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\refint\Task-2-properties.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.pdb
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\Task-2-properties.genruntimeconfig.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-2-properties\obj\Debug\net9.0\ref\Task-2-properties.dll
