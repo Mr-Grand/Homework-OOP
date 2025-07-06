@@ -1,31 +1,37 @@
 ﻿namespace Task_4;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         Deck deck = new();
         Player player = new();
         CurrentDeck currentDeck = new();
 
         // Заполняем текущую колоду копиями карт
-        for (int i = 1; i < deck.GetCount()+1; i++)
-        {
-            currentDeck.AddCard(deck.GetCardAtNumber(i));
-        }
+        for (int i = 1; i < deck.GetCount() + 1; i++) currentDeck.AddCard(deck.GetCardAtNumber(i));
 
 
+        // Цикл взятия карт игроком
+        string StopWord = null;
         do
         {
             Random random = new();
-            Console.WriteLine($"Здравствуйте! Сейчас в колоде {currentDeck.GetCount()+1} карт!" +
-                              $"\nВы можете взять {player.MaxTakenCount}. Какую выберете?");
-            
-            int CardNumber = Convert.ToInt32(Console.ReadLine());
-            if (CardNumber <= currentDeck.GetCount())
+            Console.WriteLine($"Здравствуйте! Сейчас в колоде {currentDeck.GetCount() + 1} карт!" +
+                              $"\nВы можете взять {player.MaxCurrentTakenCount}. Какую выберете?");
+
+            var CardNumber = Console.ReadLine();
+
+            if (CardNumber == "Stop")
             {
-                player.TakeCard(currentDeck.GetCardAtNumber(CardNumber));
-                currentDeck.RemoveCard(CardNumber);
+                StopWord = CardNumber;
+                continue;
+            }
+            else if (Convert.ToInt32(CardNumber) <= currentDeck.GetCount() && Convert.ToInt32(CardNumber) > 0)
+            {
+                
+                player.TakeCard(currentDeck.GetCardAtNumber(Convert.ToInt32(CardNumber)));
+                currentDeck.RemoveCard(Convert.ToInt32(CardNumber));
             }
             else
             {
@@ -34,21 +40,20 @@ class Program
             }
 
             player.TakenCount++;
-            player.MaxTakenCount--;
+            player.MaxCurrentTakenCount--;
+        } while ((player.TakenCount < player.MaxTakenCount) && StopWord != "Stop");
 
-        } while (player.TakenCount < 4);
-        
-        Console.WriteLine("\n** " + new string('-',20) + " **");
+        Console.WriteLine("\n** " + new string('-', 20) + " **");
         Console.WriteLine("Взятые карты:");
         player.ShowCards();
-        Console.Write("\n** " + new string('-',20) + " **");
-        
+        Console.Write("\n** " + new string('-', 20) + " **");
     }
 
-    class Player
+    private class Player
     {
         private List<Card> _takenCards = new();
         private int _takenCount = 0;
+        private int _maxCurrentTakenCount = 4;
         private int _maxTakenCount = 4;
 
         public int TakenCount
@@ -63,87 +68,92 @@ class Program
             set => _maxTakenCount = value;
         }
         
+        public int MaxCurrentTakenCount
+        {
+            get => _maxCurrentTakenCount;
+            set => _maxCurrentTakenCount = value;
+        }
+
         public void TakeCard(Card card)
         {
             _takenCards.Add(card);
         }
-        
+
 
         public void ShowCards()
         {
-            foreach (Card card in _takenCards)
-            {
-                Console.WriteLine($"{card.Suit} - {card.ValueName}");
-            }
+            foreach (Card card in _takenCards) Console.WriteLine($"{card.Suit} - {card.ValueName}");
         }
-        
     }
 
-    class Card
+    private class Card
     {
         public string Suit { get; private set; }
         public string ValueName { get; private set; }
-        
+
 
         public Card(string suit, string value)
         {
             Suit = suit;
             ValueName = value;
         }
-        
     }
 
-    class Deck
+    private class Deck
     {
         private Card[] _cardsDeck =
         {
-            new Card("Diamonds", "T"),
-            new Card("Diamonds", "K"),
-            new Card("Diamonds", "J"),
-            new Card("Diamonds", "Q"),
-            new Card("Diamonds", "10"),
-            new Card("Diamonds", "9"),
-            new Card("Diamonds", "8"),
-            new Card("Diamonds", "7"),
-            new Card("Diamonds", "6"),
-            new Card("Hearts", "T"),
-            new Card("Hearts", "K"),
-            new Card("Hearts", "J"),
-            new Card("Hearts", "Q"),
-            new Card("Hearts", "10"),
-            new Card("Hearts", "9"),
-            new Card("Hearts", "8"),
-            new Card("Hearts", "7"),
-            new Card("Hearts", "6"),
-            new Card("Spades", "T"),
-            new Card("Spades", "K"),
-            new Card("Spades", "J"),
-            new Card("Spades", "Q"),
-            new Card("Spades", "10"),
-            new Card("Spades", "9"),
-            new Card("Spades", "8"),
-            new Card("Spades", "7"),
-            new Card("Spades", "6"),
-            new Card("Clubs", "T"),
-            new Card("Clubs", "K"),
-            new Card("Clubs", "J"),
-            new Card("Clubs", "Q"),
-            new Card("Clubs", "10"),
-            new Card("Clubs", "9"),
-            new Card("Clubs", "8"),
-            new Card("Clubs", "7"),
-            new Card("Clubs", "6")
-
+            new("Diamonds", "T"),
+            new("Diamonds", "K"),
+            new("Diamonds", "J"),
+            new("Diamonds", "Q"),
+            new("Diamonds", "10"),
+            new("Diamonds", "9"),
+            new("Diamonds", "8"),
+            new("Diamonds", "7"),
+            new("Diamonds", "6"),
+            new("Hearts", "T"),
+            new("Hearts", "K"),
+            new("Hearts", "J"),
+            new("Hearts", "Q"),
+            new("Hearts", "10"),
+            new("Hearts", "9"),
+            new("Hearts", "8"),
+            new("Hearts", "7"),
+            new("Hearts", "6"),
+            new("Spades", "T"),
+            new("Spades", "K"),
+            new("Spades", "J"),
+            new("Spades", "Q"),
+            new("Spades", "10"),
+            new("Spades", "9"),
+            new("Spades", "8"),
+            new("Spades", "7"),
+            new("Spades", "6"),
+            new("Clubs", "T"),
+            new("Clubs", "K"),
+            new("Clubs", "J"),
+            new("Clubs", "Q"),
+            new("Clubs", "10"),
+            new("Clubs", "9"),
+            new("Clubs", "8"),
+            new("Clubs", "7"),
+            new("Clubs", "6")
         };
-        
-        
-        public int GetCount() => _cardsDeck.Length;
-        public Card GetCardAtNumber(int number) => _cardsDeck.ElementAt(number - 1);
-        
-        
+
+
+        public int GetCount()
+        {
+            return _cardsDeck.Length;
+        }
+
+        public Card GetCardAtNumber(int number)
+        {
+            return _cardsDeck.ElementAt(number - 1);
+        }
     }
 
-    class CurrentDeck
+    private class CurrentDeck
     {
         private List<Card> _deck = new();
 
@@ -160,19 +170,22 @@ class Program
 
         public void RemoveCard(int index)
         {
-            _deck.RemoveAt(index-1);
+            _deck.RemoveAt(index - 1);
         }
-        
-        public Card GetCardAtNumber(int number) => _deck.ElementAt(number - 1);
+
+        public Card GetCardAtNumber(int number)
+        {
+            return _deck.ElementAt(number - 1);
+        }
 
         public void ShowCards()
         {
-            foreach (Card card in _deck)
-            {
-                Console.WriteLine($"{card.Suit} - {card.ValueName}");
-            }
+            foreach (Card card in _deck) Console.WriteLine($"{card.Suit} - {card.ValueName}");
         }
-        
-        public int GetCount() => _deck.Count;
+
+        public int GetCount()
+        {
+            return _deck.Count;
+        }
     }
 }
