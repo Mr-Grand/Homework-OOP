@@ -1,0 +1,15 @@
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\bin\Debug\net9.0\Task-5-Book-Storage.exe
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\bin\Debug\net9.0\Task-5-Book-Storage.deps.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\bin\Debug\net9.0\Task-5-Book-Storage.runtimeconfig.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\bin\Debug\net9.0\Task-5-Book-Storage.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\bin\Debug\net9.0\Task-5-Book-Storage.pdb
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.AssemblyInfo.cs
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.sourcelink.json
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\refint\Task-5-Book-Storage.dll
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.pdb
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\Task-5-Book-Storage.genruntimeconfig.cache
+C:\Users\user\Desktop\Homework OOP\Homework OOP\Task-5-Book-Storage\obj\Debug\net9.0\ref\Task-5-Book-Storage.dll
