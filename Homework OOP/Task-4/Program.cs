@@ -19,7 +19,7 @@ class Program
         {
             Random random = new();
             Console.WriteLine($"Здравствуйте! Сейчас в колоде {currentDeck.GetCount()+1} карт!" +
-                              $"\nВы можете взять {player.MaxCount}. Какую выберете?");
+                              $"\nВы можете взять {player.MaxTakenCount}. Какую выберете?");
             
             int CardNumber = Convert.ToInt32(Console.ReadLine());
             if (CardNumber <= currentDeck.GetCount())
@@ -33,10 +33,10 @@ class Program
                 continue;
             }
 
-            player.Count++;
-            player.MaxCount--;
+            player.TakenCount++;
+            player.MaxTakenCount--;
 
-        } while (player.Count < 4);
+        } while (player.TakenCount < 4);
         
         Console.WriteLine("\n** " + new string('-',20) + " **");
         Console.WriteLine("Взятые карты:");
@@ -48,19 +48,19 @@ class Program
     class Player
     {
         private List<Card> _takenCards = new();
-        private int _count = 0;
-        private int _maxCount = 4;
+        private int _takenCount = 0;
+        private int _maxTakenCount = 4;
 
-        public int Count
+        public int TakenCount
         {
-            get => _count;
-            set => _count = value;
+            get => _takenCount;
+            set => _takenCount = value;
         }
 
-        public int MaxCount
+        public int MaxTakenCount
         {
-            get => _maxCount;
-            set => _maxCount = value;
+            get => _maxTakenCount;
+            set => _maxTakenCount = value;
         }
         
         public void TakeCard(Card card)
