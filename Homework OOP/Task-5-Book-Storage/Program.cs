@@ -4,7 +4,25 @@ class Program
 {
     static void Main(string[] args)
     {
+        BookShelter bookShelter = new();
         
+        Book book1 = new("World", "God", 0);
+        Book book2 = new("War and War", "People", 10);
+        Book book3 = new("Famous world food", "Noname cook", 2022);
+        Book book4 = new("Famous world food", "Noname cook", 2020);
+        Book book5 = new("World and War", "Lev Tolstoy", 1867);
+        Book book6 = new("World and War 2", "Lev Tolstoy", 1868);
+        Book book7 = new("World and War 3", "Lev Tolstoy", 1869);
+        
+        bookShelter.AddBook(book1);
+        bookShelter.AddBook(book2);
+        bookShelter.AddBook(book3);
+        bookShelter.AddBook(book4);
+        bookShelter.AddBook(book5);
+        bookShelter.AddBook(book6);
+        bookShelter.AddBook(book7);
+        
+        bookShelter.ShowAllBooks();
     }
 
     class Book
@@ -45,11 +63,13 @@ class Program
 
         public void ShowAllBooks()
         {
+            Console.WriteLine($"\n** " + new string('-',25) + " **");
             foreach (Book book in _booksList)
             {
                 Console.WriteLine($"book name: {book.Name}, author: {book.Author}," +
                                   $" year: {book.Year}, unique code: {book.UniqueCode}");
             }
+            Console.WriteLine($"\n** " + new string('-',25) + " **");
         }
 
         private List<Book> FindBookByName(string bookName)
